@@ -4,7 +4,7 @@
 #
 #
 
-dos2unix $0 >/dev/null 2>1&
+dos2unix $0 >/dev/null 2>&1
 
 source ./public.sh
 

@@ -5,7 +5,7 @@
 #
 set -e 
 
-dos2unix $0 >/dev/null 2>1&
+dos2unix $0 >/dev/null 2>&1
 
 
 
@@ -52,6 +52,7 @@ findlistall()
 {
 [ $# -lt 1 ] && usage "need 1 para"
 DIRPATH=$1
+checkdirnoexistquit $DIRPATH
 cd $DIRPATH && find > findlist.all
 }
 #查找并忽略一些内容
@@ -59,7 +60,8 @@ findlistignore()
 {
 [ $# -lt 2 ] && usage "need 1 para"
 DIRPATH=$1
-IGNOREPATTERN=$2
+IGNOREPATTERN="$2"
+checkdirnoexistquit $DIRPATH
 cd $DIRPATH && find | grep -v $IGNOREPATTERN > findlist.ignore
 }
 #查找并寻找所要的
@@ -67,7 +69,8 @@ findlistuse()
 {
 [ $# -lt 2 ] && usage "need 1 para"
 DIRPATH=$1
-FINDPATTERN=$2
+FINDPATTERN="$2"
+checkdirnoexistquit $DIRPATH
 cd $DIRPATH && find | grep  $FINDPATTERN > findlist.grep
 }
 
